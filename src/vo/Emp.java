@@ -1,4 +1,4 @@
-package vo;
+package vo; 	
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,6 +12,23 @@ public class Emp implements Serializable{
 	private Date hiredate;	
 	private Double sal;
 	private Double comm;
+	
+	private Emp mgr;     
+	private Dept dept;  //雇员和领导关系
+
+
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
+	public Dept getDept() {
+		return dept;
+	}
+	public void setMgr(Emp mgr) {
+		this.mgr = mgr;
+	}
+	public Emp getMgr() {
+		return mgr;
+	}
 	public void setEmpno(Integer empno) {
 		this.empno = empno;
 	}

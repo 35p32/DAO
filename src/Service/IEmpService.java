@@ -15,5 +15,6 @@ public interface  IEmpService {
 	public Emp get(Integer id) throws Exception;
 	public List<Emp> list( ) throws Exception;
 	public Map<String ,Object > list(int currentPage, int linesize,String keywords,String column) throws Exception;
+	public Map<String ,Object > listDetails(int currentPage, int linesize,String keywords,String column) throws Exception;
 	
 }

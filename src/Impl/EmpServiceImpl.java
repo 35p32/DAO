@@ -17,7 +17,7 @@ import vo.Emp;
  * 
  * 我在这个类里面看不见 Dao具体的连接实现
  * 全靠 工厂类
- * 全靠工厂类和接口进行操作
+ * 全靠工厂类和接口进行操作 
  * 
  * 以后 这种功能类( 就是说实现了具体功能的类)，只要是连接借口了，全都要上工厂
  * @author 35.32
@@ -99,6 +99,22 @@ public class EmpServiceImpl implements IEmpService {
 			Map<String,Object> map = new HashMap<String, Object>();
 			
 			map.put("allEmps", DaoFactory.getIEmpDAOinstance(this.dbc.getConnection()).findAllSplit(currentPage, linesize, column, keywords) );
+			map.put("empCount", DaoFactory.getIEmpDAOinstance(this.dbc.getConnection()).getAllCount(column, keywords));
+			return map;
+		}catch (Exception e) {
+			throw e;
+		}finally {
+			this.dbc.close();
+		} 
+	}
+
+	@Override
+	public Map<String, Object> listDetails(int currentPage, int linesize,  String column,String keywords)
+			throws Exception {
+		try {
+			Map<String,Object> map = new HashMap<String, Object>();
+			
+			map.put("allEmps", DaoFactory.getIEmpDAOinstance(this.dbc.getConnection()).findAllSplitDetails(currentPage, linesize, column, keywords) );
 			map.put("empCount", DaoFactory.getIEmpDAOinstance(this.dbc.getConnection()).getAllCount(column, keywords));
 			return map;
 		}catch (Exception e) {

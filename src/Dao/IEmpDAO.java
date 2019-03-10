@@ -1,7 +1,6 @@
 package Dao;
 
 import java.util.List;
-import java.util.Set;
 
 import vo.Emp;
 
@@ -16,19 +15,29 @@ import vo.Emp;
  * @author 35.32
  *
  */
-public interface IEmpDAO {
-	//创造一个Emp 表
-	public boolean doCreate(Emp vo) throws Exception;
-	//更新一个Emp表
-	public boolean doUpdate(Emp vo) throws Exception;
-	//批量删除
-	public boolean doRemoveBatch(Set<Integer> ids) throws Exception;
-	//根据雇员编号查询指定的雇员信息
-	public Emp findById(Integer id) throws Exception;
-	//查询所有雇员信息
-	public  List<Emp> findAll() throws Exception;
-	//分页查询, 当前页，每页行数，进行模糊查询的数据列，模糊查询的关键字
-	public List<Emp> findAllSplit(Integer currentpage, Integer linesize, String column ,String keywords) throws Exception;
-	//统计查询数量
-	public Integer getAllCount(String column, String keywords) throws Exception;
+  //此处重用了IDAO 标准接口
+public interface IEmpDAO   extends IDAO<Integer ,Emp > {
+	/**
+	 * 查询雇员的详细信息， 包括其所在部门的信息
+	 * @param id 要查询的雇员编号
+	 * @return  以vo对象返回，没有则返回NULL
+	 * @throws Exception SQL查询错误
+	 */
+	public Emp findByIdDetails(Integer id) throws Exception;
+	/**
+	 * 查询所有雇员的所有完整信息
+	 * @return	雇员的 List<> 对象，如果没有数据，集	合长度为零
+ 	 * @throws Exception SQL查询错误
+	 */
+	public List<Emp> findAllDetails() throws Exception;
+	/**
+	 * 分页查询 雇员详细信息
+	 * @param currentpage 当前所在页数
+	 * @param linesize  一页含有几条记录
+	 * @param column 进行模糊查询的数据库列
+	 * @param keywords 模糊查询关键词
+	 * @return
+	 */
+	public List<Emp> findAllSplitDetails(Integer currentPage,Integer lineSize, String column ,String keyword) throws Exception;
+	
 }  
